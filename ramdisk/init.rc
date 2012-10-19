@@ -860,8 +860,8 @@ on property:service.brcm.bt.soft_onoff=0
 service installd /system/bin/installd
     socket installd stream 600 system system
 
-service flash_recovery /system/etc/install-recovery.sh
-    oneshot
+#service flash_recovery /system/etc/install-recovery.sh
+#    oneshot
 
 service racoon /system/bin/racoon
     socket racoon stream 600 system system
@@ -977,6 +977,7 @@ service sysinit /system/bin/logwrapper /system/xbin/busybox run-parts /system/et
 
 on property:dev.bootcomplete=1
     start sysinit
+    stop samsungani
 
 on property:encryption.bootmode=remount
 
