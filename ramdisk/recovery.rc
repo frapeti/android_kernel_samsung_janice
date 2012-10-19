@@ -6,13 +6,14 @@ on init
     export LD_LIBRARY_PATH .:/sbin:/vendor/lib:/system/lib
     export ANDROID_ROOT /system
     export ANDROID_DATA /data
-    export EXTERNAL_STORAGE /emmc
-    export EXTERNAL_STORAGE2 /sdcard
+    export EXTERNAL_STORAGE  /sdcard
+    export EXTERNAL_STORAGE2 /external_sd
 
     symlink /misc /etc
 
-    mkdir /emmc
     mkdir /sdcard
+    mkdir /external_sd
+
     mkdir /preload
     mkdir /system
     mkdir /data
@@ -40,7 +41,7 @@ on early-fs
 on fs
     mount tmpfs tmpfs /tmp
 
-    exec apply_disk_policy
+    #exec apply_disk_policy
 
 on post-fs
 
@@ -67,12 +68,12 @@ on boot
 service ueventd /sbin/ueventd
     critical
 
-service console /system/bin/sh
+service console /sbin/busybox sh
     console
 
 service recovery /sbin/recovery
 
-service adbd /sbin/adbd-recovery recovery
+service adbd /sbin/adbd recovery
     disabled
 
 on property:persist.service.adb.enable=1

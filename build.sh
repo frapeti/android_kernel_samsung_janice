@@ -4,7 +4,7 @@ BASEDIR="/home/diego-ch/Android/i9070"
 OUTDIR="$BASEDIR/out"
 INITRAMFSDIR="$BASEDIR/ramdisk"
 STOCKMODULESDIR="$BASEDIR/stockmodules"
-TOOLCHAIN="/home/diego-ch/Android/cm9/prebuilt/linux-x86/toolchain/arm-eabi-4.4.3/bin/arm-eabi-"
+TOOLCHAIN="/home/diego-ch/Android/toolchains/arm-eabi-4.4.3/bin/arm-eabi-"
 
 STARTTIME=$SECONDS
 
@@ -23,7 +23,7 @@ case "$1" in
 		make cyanogenmod_janice_defconfig ARCH=arm CROSS_COMPILE=$TOOLCHAIN
 
 		echo -e "\n\n Compiling I9070 Kernel and Modules... \n\n"
-		make -j4 ARCH=arm CROSS_COMPILE=$TOOLCHAIN CONFIG_INITRAMFS_SOURCE=$INITRAMFSDIR
+		make -j9 ARCH=arm CROSS_COMPILE=$TOOLCHAIN CONFIG_INITRAMFS_SOURCE=$INITRAMFSDIR
 
 		echo -e "\n\n Copying Modules to InitRamFS Folder...\n\n"
 		mkdir -p $INITRAMFSDIR/lib/modules/2.6.35.7

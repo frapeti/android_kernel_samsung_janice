@@ -824,7 +824,6 @@ service playsound /system/bin/playsound
     disabled
     oneshot
 	
-#service bootanim /system/bin/bootanimation
 service samsungani /sbin/bootanimation.sh
     user graphics
     group graphics
@@ -972,13 +971,12 @@ service immvibed /system/bin/immvibed
 service kexec /system/xbin/kexec.dyn -p
     oneshot
 
-service ux500-post-boot /system/bin/sh /init.ux500.post_boot.sh
-    user root
+service sysinit /system/bin/logwrapper /system/xbin/busybox run-parts /system/etc/init.d
     disabled
     oneshot
 
 on property:dev.bootcomplete=1
-    start ux500-post-boot   
+    start sysinit
 
 on property:encryption.bootmode=remount
 
